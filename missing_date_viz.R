@@ -45,13 +45,14 @@ RT_count_rm <- twitter_merged %>%
            created_at != ymd("2019-07-06") &
            created_at != ymd("2019-07-07")) %>% 
   select(created_at)
-
 # plot of distibution (histogram) of number of tweets per day, outliers removed (n > 2,500)
 RT_count_viz_rm <- ggplot(RT_count_rm, aes(x = created_at)) +
   geom_histogram(bins = time_length(int, "day")) +
   scale_x_date(date_breaks = "1 month", date_labels = "%y %b") +
   theme_classic()
 
+
+# extra code
 df = as.data.frame(table(ymd(round_date(ymd_hms(twitter_merged$created_at), unit = "day"))))
 
 df[df$Freq >= 2500,]
